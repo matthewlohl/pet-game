@@ -13,7 +13,7 @@ const rl = readLine.createInterface({
 // Question 1 
 const question_name = () => {
     return new Promise((resolve,reject) => {
-        rl.question(('Q1: Give you pet a name: '), (name) => {
+        rl.question(('\nQ1: Give you pet a name: '), (name) => {
             console.log(`Your new pet is ${name}\n`)
             pet1.name = name
             resolve()
@@ -26,7 +26,7 @@ const question_name = () => {
 const question_color = () => {
     return new Promise((resolve,reject) => {
         rl.question(('Q2: Give you pet a color: '), (color) => {
-            console.log(`Your new pet is ${color}\n`)
+            console.log(`Your new pet is in ${color} colour\n`)
             pet1.color = color
             resolve()
         })
@@ -37,9 +37,8 @@ const question_color = () => {
 // Question 3
 const question_food = () => {
     return new Promise((resolve,reject) => {
-        rl.question(('Q2: Give you some food (grapes/ walnuts/ lettuce/ pizza): '), (food) => {
-            console.log(`You gave some ${food} to ${pet1.name}`)
-            pet1.food = food
+        rl.question(('Q2: Give you some food 1)grapes 2) walnuts 3) lettuce 4) pizza: '), (food) => {
+            pet1.food = parseFloat(food);
             hungerLevel_calculator();
             resolve()
         })
@@ -50,7 +49,7 @@ const question_food = () => {
 // Question 4
 const question_activity = () => {
     return new Promise((resolve,reject) => {
-        rl.question(('Q2: What activities do you want your pet to do? (1)watch TV  2)talk a stroll 3)take a bath 4)eat snacks):  '), (activity) => {
+        rl.question(('Q2: What activities do you want your pet to do? 1)watch TV  2)talk a stroll 3)take a bath 4)eat snacks:  '), (activity) => {
             pet1.activity = parseFloat(activity);
             happinessLevel_calculator();
             resolve()
@@ -76,16 +75,25 @@ userInput()
 
 // Calculators
 
+var hunger = 0
 hungerLevel_calculator = () => {
     
-    if (pet1.food === 'grapes'){
-        pet1.hungerLv = 4
+    if (pet1.food === 1){
+        hunger += 4
+    } else if (pet1.food === 2){
+        hunger += 1
+    } else if (pet1.food === 3){
+        hunger += 3
+    } else if (pet1.food === 4){
+        hunger -= 5
     }
+    pet1.hungerLv = hunger;
     console.log(`Your pet's hungerness level: ${pet1.hungerLv}/10\n`)
 }
 
+var happiness = 0
 happinessLevel_calculator = () => {
-    var happiness = 0
+    
     if (pet1.activity === 1){
         happiness -= 3 
     } else if (pet1.activity === 2){
@@ -104,14 +112,14 @@ async function game () {
     try{
         let game = 1
         while (game < 6){
-            console.log(`Game ${game}\n`)
+            console.log('---------------')
+            console.log(`Game ${game}`)
             await question_food()
             await question_activity()
             game += 1;
         }
     }
     catch{
-        
     }
 }
 
