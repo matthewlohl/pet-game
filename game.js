@@ -37,7 +37,7 @@ const question_color = () => {
 // Question 3
 const question_food = () => {
     return new Promise((resolve,reject) => {
-        rl.question(('Q2: Give you some food 1)grapes 2) walnuts 3) lettuce 4) pizza: '), (food) => {
+        rl.question(('Q3: Give you some food 1)grapes 2) walnuts 3) lettuce 4) pizza: '), (food) => {
             pet1.food = parseFloat(food);
             hungerLevel_calculator();
             resolve()
@@ -49,7 +49,7 @@ const question_food = () => {
 // Question 4
 const question_activity = () => {
     return new Promise((resolve,reject) => {
-        rl.question(('Q2: What activities do you want your pet to do? 1)watch TV  2)talk a stroll 3)take a bath 4)eat snacks:  '), (activity) => {
+        rl.question(('Q4: What activities do you want your pet to do? 1)watch TV  2)talk a stroll 3)take a bath 4)eat snacks:  '), (activity) => {
             pet1.activity = parseFloat(activity);
             happinessLevel_calculator();
             resolve()
@@ -87,9 +87,12 @@ hungerLevel_calculator = () => {
     } else if (pet1.food === 4){
         hunger -= 5
     }
-    pet1.hungerLv = hunger;
-    console.log(`Your pet's hungerness level: ${pet1.hungerLv}/10\n`)
-}
+
+    pet1.hungerLv = Math.min(hunger,10);
+
+        console.log(`Your pet's hungerness level: ${pet1.hungerLv}/10\n`)
+    }
+
 
 var happiness = 0
 happinessLevel_calculator = () => {
@@ -103,7 +106,9 @@ happinessLevel_calculator = () => {
     } else if (pet1.activity === 4){
         happiness -=5
     }
-    pet1.happinessLv = happiness;
+
+    pet1.happinessLv = Math.min(happiness,10);
+     
     console.log(`Your pet's happiness level: ${pet1.happinessLv}/10\n`);
 }
 
