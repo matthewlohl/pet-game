@@ -1,6 +1,5 @@
 function Pet (name, happinessLv, hungerLv, activity, color, weight){
-        this.name = name;
-        this.happinessLv = happinessLv;
+
 }
 
 const readLine = require('readline'); // import readLine
@@ -39,7 +38,7 @@ const question_color = () => {
 const question_food = () => {
     return new Promise((resolve,reject) => {
         rl.question(('Q2: Give you some food (grapes/ walnuts/ lettuce/ pizza): '), (food) => {
-            console.log(`Your new pet is ${food}`)
+            console.log(`You gave some ${food} to ${pet1.name}`)
             pet1.food = food
             hungerLevel_calculator();
             resolve()
@@ -60,14 +59,18 @@ const question_activity = () => {
     )
 }
 
+// Question 5
+
+
 // -- Use Async to run Promise functions --
 const userInput = async () => {
     pet1 = new Pet ()
     await question_name()
     await question_color()
-    await question_food()
-    await question_activity()
-    console.log(pet1)
+    await game()
+    // await question_food()
+    // await question_activity()
+    console.log(`Your score:\n minimise hunger level: ${pet1.hungerLv}/10 \n maximise happiness level: ${pet1.happinessLv}/10`)
     rl.close()
 }
 
@@ -80,7 +83,7 @@ hungerLevel_calculator = () => {
     if (pet1.food === 'grapes'){
         pet1.hungerLv = 4
     }
-    console.log(`Your pet's hungerness level: ${pet1.hungerLv}`)
+    console.log(`Your pet's hungerness level: ${pet1.hungerLv}/10\n`)
 }
 
 happinessLevel_calculator = () => {
@@ -94,10 +97,31 @@ happinessLevel_calculator = () => {
     } else if (pet1.activity === 4){
         happiness -=5
     }
-
     pet1.happinessLv = happiness;
-    console.log(`Your pet's happiness level: ${pet1.happinessLv}`);
-    
+    console.log(`Your pet's happiness level: ${pet1.happinessLv}/10\n`);
 }
 
+// game = () => {
+//     return new Promise((resolve, reject) => {
+//         let game = 0
+//         while (game < 5 ){
+//             question_food();
+//             question_activity();
+//             game += 1;
+//             resolve();
+//     }
+//     }
+//     )
+// }
+
+
+async function game () {
+    try{
+        await question_food()
+        await question_activity()
+    }
+    catch{
+        
+    }
+}
 
