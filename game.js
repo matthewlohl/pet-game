@@ -14,7 +14,7 @@ const rl = readLine.createInterface({
 const question_name = () => {
     return new Promise((resolve,reject) => {
         rl.question(('Q1: Give you pet a name: '), (name) => {
-            console.log(`Your new pet is ${name}`)
+            console.log(`Your new pet is ${name}\n`)
             pet1.name = name
             resolve()
         })
@@ -26,7 +26,7 @@ const question_name = () => {
 const question_color = () => {
     return new Promise((resolve,reject) => {
         rl.question(('Q2: Give you pet a color: '), (color) => {
-            console.log(`Your new pet is ${color}`)
+            console.log(`Your new pet is ${color}\n`)
             pet1.color = color
             resolve()
         })
@@ -59,8 +59,6 @@ const question_activity = () => {
     )
 }
 
-// Question 5
-
 
 // -- Use Async to run Promise functions --
 const userInput = async () => {
@@ -70,7 +68,7 @@ const userInput = async () => {
     await game()
     // await question_food()
     // await question_activity()
-    console.log(`Your score:\n minimise hunger level: ${pet1.hungerLv}/10 \n maximise happiness level: ${pet1.happinessLv}/10`)
+    console.log(`--- END OF GAME ---\nYour score:\n minimise hunger level: ${pet1.hungerLv}/10 \n maximise happiness level: ${pet1.happinessLv}/10`)
     rl.close()
 }
 
@@ -101,24 +99,16 @@ happinessLevel_calculator = () => {
     console.log(`Your pet's happiness level: ${pet1.happinessLv}/10\n`);
 }
 
-// game = () => {
-//     return new Promise((resolve, reject) => {
-//         let game = 0
-//         while (game < 5 ){
-//             question_food();
-//             question_activity();
-//             game += 1;
-//             resolve();
-//     }
-//     }
-//     )
-// }
-
 
 async function game () {
     try{
-        await question_food()
-        await question_activity()
+        let game = 1
+        while (game < 6){
+            console.log(`Game ${game}\n`)
+            await question_food()
+            await question_activity()
+            game += 1;
+        }
     }
     catch{
         
